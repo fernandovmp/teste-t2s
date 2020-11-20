@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using TesteT2S.WebApi.Features.Containers.Data;
 
 namespace TesteT2S.WebApi
 {
@@ -36,6 +38,8 @@ namespace TesteT2S.WebApi
                     Version = "v1"
                 });
             });
+            services.AddDbContext<ContainerContext>(options => options.UseSqlServer(
+                Configuration.GetConnectionString("SqlServerConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
