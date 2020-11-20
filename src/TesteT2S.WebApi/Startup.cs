@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using TesteT2S.WebApi.Features.Containers.Data;
+using TesteT2S.WebApi.Features.Containers.Mappers;
 
 namespace TesteT2S.WebApi
 {
@@ -40,6 +42,8 @@ namespace TesteT2S.WebApi
             });
             services.AddDbContext<ContainerContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("SqlServerConnection")));
+
+            services.AddAutoMapper(typeof(ContainerProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
