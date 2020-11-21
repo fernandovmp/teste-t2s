@@ -179,5 +179,49 @@ namespace TesteT2S.WebApi.Features.Containers
                 _ => (Container container) => container.Id
             };
         }
+
+        /// <summary>
+        /// Deleta um container pelo seu Id
+        /// </summary>
+        /// <response code="204"> O container foi deletado</response>
+        /// <response code="404"> O container solicitado não existe </response>
+        [HttpDelete("{id:int}")]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> DeleteById(int id)
+        {
+            Container containerToRemove = await _containerContext.Containers
+                .FirstOrDefaultAsync(container => container.Id == id);
+            if (containerToRemove is null)
+            {
+                return NotFound();
+            }
+            _ = _containerContext.Containers.Remove(containerToRemove);
+            _ = await _containerContext.SaveChangesAsync();
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Deleta um container pelo seu número
+        /// </summary>
+        /// <response code="204"> O container foi deletado</response>
+        /// <response code="404"> O container solicitado não existe </response>
+        [HttpDelete("{number}")]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> DeleteByNumber(string number)
+        {
+            Container containerToRemove = await _containerContext.Containers
+                .FirstOrDefaultAsync(container => container.Number == number);
+            if (containerToRemove is null)
+            {
+                return NotFound();
+            }
+            _ = _containerContext.Containers.Remove(containerToRemove);
+            _ = await _containerContext.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }
