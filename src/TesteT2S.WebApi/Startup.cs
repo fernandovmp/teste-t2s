@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,7 +34,10 @@ namespace TesteT2S.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services
+                .AddControllers()
+                .AddFluentValidation(fluentValidations => fluentValidations
+                    .RegisterValidatorsFromAssemblyContaining<Startup>()); ;
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo
