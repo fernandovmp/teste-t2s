@@ -32,7 +32,7 @@ namespace TesteT2S.WebApi.Features.Containers.Validations
                 context.AddFailure(ErrorMessage);
                 return;
             }
-            if (int.TryParse(value.Substring(0, 4), out int _))
+            if (!int.TryParse(value.Substring(0, 4), out int _))
             {
                 context.AddFailure(ErrorMessage);
                 return;
