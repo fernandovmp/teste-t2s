@@ -44,6 +44,7 @@ namespace TesteT2S.WebApi.Features.Containers
         /// <response code="400"> Retorna os erros de validação </response>
         /// <response code="409"> O número do container já está em uso </response>
         [HttpPost()]
+        [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
@@ -70,6 +71,7 @@ namespace TesteT2S.WebApi.Features.Containers
         /// <response code="200"> Retorna o container solicitado </response>
         /// <response code="404"> O container solicitado não existe </response>
         [HttpGet("{id:int}")]
+        [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ContainerViewModel>> GetById(int id)
@@ -91,6 +93,7 @@ namespace TesteT2S.WebApi.Features.Containers
         /// <response code="200"> Retorna o container solicitado </response>
         /// <response code="404"> O container solicitado não existe </response>
         [HttpGet("{number}")]
+        [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ContainerViewModel>> GetByNumber(string number)
