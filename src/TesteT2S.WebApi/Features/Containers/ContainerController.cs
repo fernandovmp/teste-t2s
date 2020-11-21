@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -106,6 +108,30 @@ namespace TesteT2S.WebApi.Features.Containers
                 return NotFound();
             }
             return _mapper.Map<ContainerViewModel>(container);
+        }
+
+        /// <summary>
+        /// Lista os containers de forma paginada
+        /// </summary>
+        /// <returns> As informações de paginação e os dados containers </returns>
+        /// <response code="200"> Retorna as informações de paginação e os dados containers </response>
+        [HttpGet()]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<PaginatedViewModel<ContainerViewModel>>> GetWithPagination(
+            [FromQuery(Name = "pagina")] int page = 1,
+            [FromQuery(Name = "tamanho")] int size = 10
+        )
+        {
+            IEnumerable<ContainerViewModel> containers = await _containerContext.Containers
+                .AsNoTracking()
+                .OrderBy(container => container.Number)
+                .Skip((page - 1) * size)
+                .Take(size)
+                .Select(container => _mapper.Map<ContainerViewModel>(container))
+                .ToListAsync();
+            int containersCount = await _containerContext.Containers.CountAsync();
+            return new PaginatedViewModel<ContainerViewModel>(page, size, containersCount, containers);
         }
     }
 }
