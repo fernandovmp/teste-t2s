@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
@@ -39,6 +41,9 @@ namespace TesteT2S.WebApi
                     Title = "TesteT2S.WebApi",
                     Version = "v1"
                 });
+                string xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                string xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
             });
             services.AddDbContext<ContainerContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("SqlServerConnection")));
