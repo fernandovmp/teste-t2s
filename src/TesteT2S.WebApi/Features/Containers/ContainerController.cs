@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -120,18 +121,62 @@ namespace TesteT2S.WebApi.Features.Containers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<PaginatedViewModel<ContainerViewModel>>> GetWithPagination(
             [FromQuery(Name = "pagina")] int page = 1,
-            [FromQuery(Name = "tamanho")] int size = 10
+            [FromQuery(Name = "tamanho")] int size = 10,
+            [FromQuery(Name = "ordenar_por")] string sortBy = "numero"
         )
         {
-            IEnumerable<ContainerViewModel> containers = await _containerContext.Containers
-                .AsNoTracking()
-                .OrderBy(container => container.Number)
+            IQueryable<Container> query = _containerContext.Containers
+                .AsNoTracking();
+
+            string[] sortValues = sortBy.ToLower().Split('_');
+            query = ResolveSortingParam(query, sortValues);
+
+            IEnumerable<ContainerViewModel> containers = await query
                 .Skip((page - 1) * size)
                 .Take(size)
                 .Select(container => _mapper.Map<ContainerViewModel>(container))
                 .ToListAsync();
             int containersCount = await _containerContext.Containers.CountAsync();
             return new PaginatedViewModel<ContainerViewModel>(page, size, containersCount, containers);
+        }
+
+        private static IQueryable<Container> ResolveSortingParam(IQueryable<Container> query, string[] sortValues)
+        {
+            if (sortValues.Length >= 2)
+            {
+                return ResolveSortingParam(query, sortKey: sortValues[0], sortPattern: sortValues[1]);
+            }
+            return query.OrderBy(container => container.Number);
+
+        }
+
+        private static IQueryable<Container> ResolveSortingParam(IQueryable<Container> query,
+            string sortKey,
+            string sortPattern)
+        {
+            if (sortPattern == "asc")
+            {
+                query = query
+                    .OrderBy(SelectSortKey(sortKey))
+                    .ThenBy(container => container.Number);
+                return query;
+            }
+            return query
+                .OrderByDescending(SelectSortKey(sortKey))
+                .ThenBy(container => container.Number);
+        }
+
+        private static Expression<Func<Container, object>> SelectSortKey(string key)
+        {
+            return key switch
+            {
+                "numero" => (Container container) => container.Number,
+                "tipo" => (Container container) => container.Type,
+                "status" => (Container container) => container.Status,
+                "categoria" => (Container container) => container.Category,
+                "cliente" => (Container container) => container.Customer,
+                _ => (Container container) => container.Id
+            };
         }
     }
 }
