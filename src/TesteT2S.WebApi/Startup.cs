@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Swagger;
 using TesteT2S.WebApi.Features.Containers.Data;
 using TesteT2S.WebApi.Features.Containers.Mappers;
 
@@ -48,6 +49,7 @@ namespace TesteT2S.WebApi
                 string xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 string xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 options.IncludeXmlComments(xmlPath);
+                options.AddFluentValidationRules();
             });
             services.AddDbContext<ContainerContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("SqlServerConnection")));
