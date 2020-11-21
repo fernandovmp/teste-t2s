@@ -54,10 +54,11 @@ namespace TesteT2S.WebApi.Features.Containers
         public async Task<ActionResult<ContainerViewModel>> Create(CreateContainerViewModel model)
         {
             Container container = _mapper.Map<Container>(model);
-            Container databaseContainer = await _containerContext.Containers
+            string numberInDatabase = await _containerContext.Containers
                 .AsNoTracking()
-                .FirstOrDefaultAsync(_container => _container.Number == container.Number);
-            if (databaseContainer is not null)
+                .Select(_container => _container.Number)
+                .FirstOrDefaultAsync(number => number == container.Number);
+            if (numberInDatabase is not null)
             {
                 return Conflict();
             }
