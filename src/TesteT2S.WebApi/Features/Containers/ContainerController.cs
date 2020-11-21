@@ -223,5 +223,94 @@ namespace TesteT2S.WebApi.Features.Containers
             _ = await _containerContext.SaveChangesAsync();
             return NoContent();
         }
+
+        /// <summary>
+        /// Atualiza os dados de um container
+        /// </summary>
+        /// /// Exemplo:
+        ///
+        ///     PUT /containers/1
+        ///     {
+        ///         "numero": "1234abcdefg,
+        ///         "cliente": "Fernando",
+        ///         "tipo": 0,
+        ///         "status": 0,
+        ///         "categoria": 0
+        ///     }
+        /// </remarks>
+        /// <response code="204"> O container foi atualizado</response>
+        /// <response code="400"> Retorna os erros de validações </response>
+        /// <response code="404"> O container solicitado não existe </response>
+        [HttpPut("{id:int}")]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> UpdateById(int id, CreateContainerViewModel model)
+        {
+            Container containerInDatabase = await _containerContext.Containers
+                .AsNoTracking()
+                .Select(_container => new Container
+                {
+                    Id = _container.Id,
+                    Number = _container.Number
+                })
+                .FirstOrDefaultAsync(_container => _container.Id == id);
+            if (containerInDatabase is null)
+            {
+                return NotFound();
+            }
+            Container container = _mapper.Map<Container>(model);
+            container.Id = containerInDatabase.Id;
+            container.Number = containerInDatabase.Number;
+            _containerContext.Entry(container).State = EntityState.Modified;
+            _ = await _containerContext.SaveChangesAsync();
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Atualiza os dados de um container
+        /// </summary>
+        /// /// <remarks>
+        /// Exemplo:
+        ///
+        ///     PUT /containers/1234abcdefg
+        ///     {
+        ///         "numero": "1234abcdefg,
+        ///         "cliente": "Fernando",
+        ///         "tipo": 0,
+        ///         "status": 0,
+        ///         "categoria": 0
+        ///     }
+        /// </remarks>
+        /// <response code="204"> O container foi atualizado</response>
+        /// <response code="400"> Retorna os erros de validações </response>
+        /// <response code="404"> O container solicitado não existe </response>
+        [HttpPut("{number}")]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> UpdateByNumber(string number, CreateContainerViewModel model)
+        {
+            Container containerInDatabase = await _containerContext.Containers
+                .AsNoTracking()
+                .Select(_container => new Container
+                {
+                    Id = _container.Id,
+                    Number = _container.Number
+                })
+                .FirstOrDefaultAsync(_container => _container.Number == number);
+            if (containerInDatabase is null)
+            {
+                return NotFound();
+            }
+            Container container = _mapper.Map<Container>(model);
+            container.Id = containerInDatabase.Id;
+            container.Number = containerInDatabase.Number;
+            _containerContext.Entry(container).State = EntityState.Modified;
+            _ = await _containerContext.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }
