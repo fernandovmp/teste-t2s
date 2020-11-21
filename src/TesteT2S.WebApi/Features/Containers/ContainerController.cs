@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -62,16 +63,46 @@ namespace TesteT2S.WebApi.Features.Containers
             return CreatedAtAction(nameof(GetById), new { id = container.Id }, viewModel);
         }
 
+        /// <summary>
+        /// Busca um container pelo Id
+        /// </summary>
+        /// <returns> O container solicitado </returns>
+        /// <response code="200"> Retorna o container solicitado </response>
+        /// <response code="404"> O container solicitado não existe </response>
         [HttpGet("{id:int}")]
-        public ActionResult<ContainerViewModel> GetById(int id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<ContainerViewModel>> GetById(int id)
         {
-            throw new NotImplementedException();
+            Container container = await _containerContext.Containers
+                .AsNoTracking()
+                .FirstOrDefaultAsync(_container => _container.Id == id);
+            if (container is null)
+            {
+                return NotFound();
+            }
+            return _mapper.Map<ContainerViewModel>(container);
         }
 
+        /// <summary>
+        /// Busca um container pelo número
+        /// </summary>
+        /// <returns> O container solicitado </returns>
+        /// <response code="200"> Retorna o container solicitado </response>
+        /// <response code="404"> O container solicitado não existe </response>
         [HttpGet("{number}")]
-        public ActionResult<ContainerViewModel> GetByNumber(string number)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<ContainerViewModel>> GetByNumber(string number)
         {
-            throw new NotImplementedException();
+            Container container = await _containerContext.Containers
+                .AsNoTracking()
+                .FirstOrDefaultAsync(_container => _container.Number == number);
+            if (container is null)
+            {
+                return NotFound();
+            }
+            return _mapper.Map<ContainerViewModel>(container);
         }
     }
 }
