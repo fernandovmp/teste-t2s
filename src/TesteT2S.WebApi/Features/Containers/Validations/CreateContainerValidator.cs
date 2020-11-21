@@ -32,12 +32,12 @@ namespace TesteT2S.WebApi.Features.Containers.Validations
                 context.AddFailure(ErrorMessage);
                 return;
             }
-            if (!int.TryParse(value.Substring(0, 4), out int _))
+            if (!value.Substring(0, 4).All(character => char.IsLetter(character)))
             {
                 context.AddFailure(ErrorMessage);
                 return;
             }
-            if (!value.Substring(4).All(character => char.IsLetter(character)))
+            if (!value.Substring(4).All(character => char.IsDigit(character)))
             {
                 context.AddFailure(ErrorMessage);
             }

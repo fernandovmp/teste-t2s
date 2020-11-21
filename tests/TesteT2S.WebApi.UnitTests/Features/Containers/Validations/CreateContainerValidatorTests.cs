@@ -31,7 +31,7 @@ namespace TesteT2S.WebApi.UnitTests.Features.Containers.Validations
                 new CreateContainerViewModel{
                     Categoria = ContainerCategory.Importation,
                     Cliente = "Fernando",
-                    Numero = "1234abcdefg",
+                    Numero = "abcd1234567",
                     Status = ContainerStatus.Empty,
                     Tipo = 20
                 }
@@ -40,7 +40,7 @@ namespace TesteT2S.WebApi.UnitTests.Features.Containers.Validations
                 new CreateContainerViewModel{
                     Categoria = ContainerCategory.Exportation,
                     Cliente = "Fernando",
-                    Numero = "1234abcdefg",
+                    Numero = "abcd1234567",
                     Status = ContainerStatus.Empty,
                     Tipo = 20
                 }
@@ -49,7 +49,7 @@ namespace TesteT2S.WebApi.UnitTests.Features.Containers.Validations
                 new CreateContainerViewModel{
                     Categoria = ContainerCategory.Exportation,
                     Cliente = "Fernando",
-                    Numero = "1234abcdefg",
+                    Numero = "abcd1234567",
                     Status = ContainerStatus.Full,
                     Tipo = 20
                 }
@@ -58,7 +58,7 @@ namespace TesteT2S.WebApi.UnitTests.Features.Containers.Validations
                 new CreateContainerViewModel{
                     Categoria = ContainerCategory.Exportation,
                     Cliente = "Fernando",
-                    Numero = "1234abcdefg",
+                    Numero = "abcd1234567",
                     Status = ContainerStatus.Full,
                     Tipo = 40
                 }
@@ -67,7 +67,7 @@ namespace TesteT2S.WebApi.UnitTests.Features.Containers.Validations
                 new CreateContainerViewModel{
                     Categoria = ContainerCategory.Exportation,
                     Cliente = "Fernando",
-                    Numero = "0000aaaaaaa",
+                    Numero = "aaaa0000000",
                     Status = ContainerStatus.Full,
                     Tipo = 40
                 }
@@ -76,7 +76,7 @@ namespace TesteT2S.WebApi.UnitTests.Features.Containers.Validations
                 new CreateContainerViewModel{
                     Categoria = ContainerCategory.Exportation,
                     Cliente = "F",
-                    Numero = "0000aaaaaaa",
+                    Numero = "aaaa0000000",
                     Status = ContainerStatus.Full,
                     Tipo = 40
                 }
@@ -85,7 +85,7 @@ namespace TesteT2S.WebApi.UnitTests.Features.Containers.Validations
                 new CreateContainerViewModel{
                     Categoria = ContainerCategory.Exportation,
                     Cliente = "IjCQagrhMsxQwIZqfCINnYlYtDuNbKRnYZjteFlDSyNrXvRqLD",
-                    Numero = "0000aaaaaaa",
+                    Numero = "aaaa0000000",
                     Status = ContainerStatus.Full,
                     Tipo = 40
                 }
@@ -99,7 +99,7 @@ namespace TesteT2S.WebApi.UnitTests.Features.Containers.Validations
             {
                 Categoria = ContainerCategory.Importation,
                 Cliente = "IjCQagrhMsxQwIZqfCINnYlYtDuNbKRnYZjteFlDSyNrXvRqLDCmTDTeZdpd",
-                Numero = "1234abcdefg",
+                Numero = "abcd1234567",
                 Status = ContainerStatus.Empty,
                 Tipo = 20
             };
@@ -114,7 +114,7 @@ namespace TesteT2S.WebApi.UnitTests.Features.Containers.Validations
             {
                 Categoria = ContainerCategory.Importation,
                 Cliente = "",
-                Numero = "1234abcdefg",
+                Numero = "abcd1234567",
                 Status = ContainerStatus.Empty,
                 Tipo = 20
             };
@@ -129,7 +129,7 @@ namespace TesteT2S.WebApi.UnitTests.Features.Containers.Validations
             {
                 Categoria = ContainerCategory.Importation,
                 Cliente = "Fernando",
-                Numero = "1234abcdefg",
+                Numero = "abcd1234567",
                 Status = ContainerStatus.Empty,
                 Tipo = 15
             };
@@ -144,7 +144,7 @@ namespace TesteT2S.WebApi.UnitTests.Features.Containers.Validations
             {
                 Categoria = ContainerCategory.Importation,
                 Cliente = "Fernando",
-                Numero = "1234abcdefg",
+                Numero = "abcd1234567",
                 Status = (ContainerStatus)2,
                 Tipo = 20
             };
@@ -159,7 +159,7 @@ namespace TesteT2S.WebApi.UnitTests.Features.Containers.Validations
             {
                 Categoria = (ContainerCategory)2,
                 Cliente = "Fernando",
-                Numero = "1234abcdefg",
+                Numero = "abcd1234567",
                 Status = ContainerStatus.Full,
                 Tipo = 20
             };
@@ -172,7 +172,10 @@ namespace TesteT2S.WebApi.UnitTests.Features.Containers.Validations
         [InlineData("1234abcdefgh")]
         [InlineData("1234abcdef7")]
         [InlineData("123aabcdefg")]
-        [InlineData("abcd1234567")]
+        [InlineData("abcd12345a6")]
+        [InlineData("0bcd1234567")]
+        [InlineData("abc01234567")]
+        [InlineData("abcde234567")]
         [InlineData("123a1bcdefg")]
         [InlineData("1234abc4efg")]
         [InlineData("12345678901")]
