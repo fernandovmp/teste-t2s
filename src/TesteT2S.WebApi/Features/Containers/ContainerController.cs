@@ -227,6 +227,7 @@ namespace TesteT2S.WebApi.Features.Containers
         /// <summary>
         /// Atualiza os dados de um container
         /// </summary>
+        /// <remarks>
         /// /// Exemplo:
         ///
         ///     PUT /containers/1
