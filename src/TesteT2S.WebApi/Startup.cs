@@ -19,7 +19,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using TesteT2S.WebApi.Configuration;
-using TesteT2S.WebApi.Features.Containers.Data;
+using TesteT2S.WebApi.Data;
 using TesteT2S.WebApi.Features.Containers.Mappers;
 
 namespace TesteT2S.WebApi
