@@ -14,11 +14,15 @@
     (nzPageIndexChange)="changePage($event)">
     <thead>
       <tr>
-        <th>Número</th>
-        <th>Cliente</th>
-        <th>Tipo</th>
-        <th>Categoria</th>
-        <th>Status</th>
+        <th [nzSortOrder]>Número</th>
+        <th [nzSortFn]="true" (nzSortOrderChange)="sort('cliente', $event)">
+          Cliente</th>
+        <th [nzSortFn]="true" (nzSortOrderChange)="sort('tipo', $event)">Tipo
+        </th>
+        <th [nzSortFn]="true" (nzSortOrderChange)="sort('categoria', $event)">
+          Categoria</th>
+        <th [nzSortFn]="true" (nzSortOrderChange)="sort('status', $event)">
+          Status</th>
         <th></th>
       </tr>
     </thead>
