@@ -15,8 +15,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
+using TesteT2S.WebApi.Configuration;
 using TesteT2S.WebApi.Features.Containers.Data;
 using TesteT2S.WebApi.Features.Containers.Mappers;
 
@@ -51,10 +53,29 @@ namespace TesteT2S.WebApi
                 options.IncludeXmlComments(xmlPath);
                 options.AddFluentValidationRules();
             });
-            services.AddDbContext<ContainerContext>(options => options.UseSqlServer(
-                Configuration.GetConnectionString("SqlServerConnection")));
+            services.AddDbContext<ContainerContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection"));
+                options.LogTo(Console.WriteLine);
+            });
 
             services.AddAutoMapper(typeof(ContainerProfile));
+
+            var corsOptions = new ApplicationCorsOptions();
+            Configuration.Bind("CorsOptions", corsOptions);
+            services
+                .Configure<ApplicationCorsOptions>(Configuration.GetSection("CorsOptions"))
+                .AddCors(options =>
+                {
+                    options.AddPolicy(corsOptions.PolicyName, configurePolicy =>
+                    {
+                        configurePolicy
+                            .AllowCredentials()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .WithOrigins(corsOptions.AllowedOrigin);
+                    });
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -78,6 +99,10 @@ namespace TesteT2S.WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            ApplicationCorsOptions corsOptions = app.ApplicationServices
+                .GetService<IOptions<ApplicationCorsOptions>>().Value;
+            app.UseCors(corsOptions.PolicyName);
 
             app.UseAuthorization();
 
