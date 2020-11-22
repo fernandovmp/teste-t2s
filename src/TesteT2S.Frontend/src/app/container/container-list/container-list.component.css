@@ -1,0 +1,10 @@
+.containers-list-page {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.containers-list-page .action-btn {
+  align-self: flex-end;
+  font-weight: bold;
+}

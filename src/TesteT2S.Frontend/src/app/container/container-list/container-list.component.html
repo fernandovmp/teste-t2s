@@ -1,0 +1,41 @@
+<div class="containers-list-page">
+  <a nz-button
+    class="action-btn"
+    [nzType]="'primary'"
+    [routerLink]="['new']">
+    Novo Container
+  </a>
+  <nz-table #containersTable
+    [nzData]="(containers$ | async)?.dados"
+    [nzPageSize]="(containers$ | async)?.tamanho || 0"
+    [nzPageIndex]="(containers$ | async)?.paginaAtual || 0"
+    [nzTotal]="(containers$ | async)?.quantidadeTotal || 0"
+    (nzPageIndexChange)="changePage($event)">
+    <thead>
+      <tr>
+        <th>Número</th>
+        <th>Cliente</th>
+        <th>Tipo</th>
+        <th>Categoria</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let container of (containers$ | async)?.dados">
+        <td>{{container.numero}}</td>
+        <td>{{container.cliente}}</td>
+        <td>{{container.tipo}}</td>
+        <td>{{container.categoria.descricao}}</td>
+        <td>{{container.status.descricao}}</td>
+        <td>
+          <a nz-icon
+            nzType="edit"
+            nzTheme="outline"
+            [routerLink]="['edit', container.id]">
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
