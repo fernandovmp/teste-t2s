@@ -6,10 +6,11 @@
     Novo Container
   </a>
   <nz-table #containersTable
+    [nzFrontPagination]="false"
     [nzData]="(containers$ | async)?.dados"
-    [nzPageSize]="(containers$ | async)?.tamanho || 0"
-    [nzPageIndex]="(containers$ | async)?.paginaAtual || 0"
-    [nzTotal]="(containers$ | async)?.quantidadeTotal || 0"
+    [nzPageSize]="(containers$ | async)?.tamanho"
+    [nzPageIndex]="(containers$ | async)?.paginaAtual"
+    [nzTotal]="(containers$ | async)?.quantidadeTotal"
     (nzPageIndexChange)="changePage($event)">
     <thead>
       <tr>
@@ -22,7 +23,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let container of (containers$ | async)?.dados">
+      <tr *ngFor="let container of containersTable.data">
         <td>{{container.numero}}</td>
         <td>{{container.cliente}}</td>
         <td>{{container.tipo}}</td>
