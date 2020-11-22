@@ -8,3 +8,11 @@ export interface Container {
   status: IApiEnum;
   categoria: IApiEnum;
 }
+
+export interface PostContainerData {
+  numero: string;
+  cliente: string;
+  tipo: number;
+  status: number;
+  categoria: number;
+}

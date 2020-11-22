@@ -1,0 +1,14 @@
+.container-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 6px;
+  align-self: flex-end;
+}
+
+.form-buttons button {
+  font-weight: bold;
+}

@@ -1,0 +1,97 @@
+<form class="container-form"
+  nz-form
+  [nzLayout]="'vertical'"
+  [formGroup]="containerForm"
+  (ngSubmit)="onSubmit()">
+  <nz-form-item>
+    <nz-form-label nzFor="numero">Número do container</nz-form-label>
+    <nz-form-control [nzErrorTip]="numberErrorTip">
+      <input nz-input
+        name="numero"
+        id="numero"
+        formControlName="numero" />
+      <ng-template #numberErrorTip let-control>
+        <ng-container *ngIf="control.hasError('required')">
+          O número do container é obrigatório
+        </ng-container>
+        <ng-container *ngIf="control.hasError('conflict')">
+          Esse número de container já foi cadastrado
+        </ng-container>
+        <ng-container *ngIf="control.hasError('containerNumberValidation')">
+          O número do container deve seguir as seguintes regras
+          <ul>
+            <li>Os 4 primeiros caractéres devem ser letras</li>
+            <li>Os 7 caractéres seguintes devem ser números</li>
+          </ul>
+        </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzFor="cliente">Cliente</nz-form-label>
+    <nz-form-control [nzErrorTip]="customerErrorTip">
+      <input nz-input
+        name="cliente"
+        id="cliente"
+        formControlName="cliente" />
+      <ng-template #customerErrorTip let-control>
+        <ng-container *ngIf="control.hasError('maxlength')">
+          O nome do cliente não deve ultrapassar 50 caractéres
+        </ng-container>
+        <ng-container *ngIf="control.hasError('required')">
+          O nome do cliente é obrigatório
+        </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzFor="tipo">Tipo</nz-form-label>
+    <nz-form-control>
+      <nz-select name="tipo"
+        id="tipo"
+        formControlName="tipo">
+        <nz-option nzValue="20"
+          nzLabel="20"></nz-option>
+        <nz-option nzValue="40"
+          nzLabel="40"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzFor="categoria">Categoria</nz-form-label>
+    <nz-form-control>
+      <nz-select name="categoria"
+        id="categoria"
+        formControlName="categoria">
+        <nz-option nzValue="0"
+          nzLabel="Importação"></nz-option>
+        <nz-option nzValue="1"
+          nzLabel="Exportação"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzFor="status">Status</nz-form-label>
+    <nz-form-control>
+      <nz-select name="status"
+        id="status"
+        formControlName="status">
+        <nz-option nzValue="0"
+          nzLabel="Vazio"></nz-option>
+        <nz-option nzValue="1"
+          nzLabel="Cheio"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-button-group class="form-buttons">
+    <button *ngIf="isInEditMode$ | async"
+      nz-button
+      nzDanger
+      [nzType]="'primary'"
+      type="button"
+      (click)="onDelete()">Deletar</button>
+    <button nz-button
+      [nzType]="'primary'"
+      [disabled]="!containerForm.valid">Salvar</button>
+  </nz-button-group>
+</form>
