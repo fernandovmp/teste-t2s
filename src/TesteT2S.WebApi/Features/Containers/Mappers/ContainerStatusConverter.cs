@@ -1,14 +1,14 @@
 using System;
 using AutoMapper;
 using TesteT2S.WebApi.Features.Containers.Enums;
-using TesteT2S.WebApi.Features.Containers.ViewModels;
+using TesteT2S.WebApi.ViewModels;
 
 namespace TesteT2S.WebApi.Features.Containers.Mappers
 {
-    public class ContainerStatusConverter : ITypeConverter<ContainerStatus, ContainerEnumViewModel>
+    public class ContainerStatusConverter : ITypeConverter<ContainerStatus, EnumViewModel>
     {
-        public ContainerEnumViewModel Convert(ContainerStatus source,
-            ContainerEnumViewModel destination,
+        public EnumViewModel Convert(ContainerStatus source,
+            EnumViewModel destination,
             ResolutionContext context)
         {
             string description = source switch
@@ -18,7 +18,7 @@ namespace TesteT2S.WebApi.Features.Containers.Mappers
                 _ => throw new Exception(
                     $"There is no supported conversion to value {source} of {nameof(ContainerStatus)}")
             };
-            return new ContainerEnumViewModel
+            return new EnumViewModel
             {
                 Id = (int)source,
                 Descricao = description

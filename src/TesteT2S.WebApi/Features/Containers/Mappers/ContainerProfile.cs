@@ -2,6 +2,7 @@ using AutoMapper;
 using TesteT2S.WebApi.Features.Containers.Enums;
 using TesteT2S.WebApi.Features.Containers.Models;
 using TesteT2S.WebApi.Features.Containers.ViewModels;
+using TesteT2S.WebApi.ViewModels;
 
 namespace TesteT2S.WebApi.Features.Containers.Mappers
 {
@@ -22,9 +23,9 @@ namespace TesteT2S.WebApi.Features.Containers.Mappers
                 {
                     options.MapFrom(source => source.Category);
                 });
-            CreateMap<ContainerStatus, ContainerEnumViewModel>()
+            CreateMap<ContainerStatus, EnumViewModel>()
                 .ConvertUsing<ContainerStatusConverter>();
-            CreateMap<ContainerCategory, ContainerEnumViewModel>()
+            CreateMap<ContainerCategory, EnumViewModel>()
                 .ConvertUsing<ContainerCategoryConverter>();
         }
     }

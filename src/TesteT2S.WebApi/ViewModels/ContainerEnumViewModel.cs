@@ -1,6 +1,6 @@
-namespace TesteT2S.WebApi.Features.Containers.ViewModels
+namespace TesteT2S.WebApi.ViewModels
 {
-    public class ContainerEnumViewModel
+    public class EnumViewModel
     {
         public int Id { get; set; }
         public string Descricao { get; set; }

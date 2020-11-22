@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using TesteT2S.WebApi.Features.Containers.Data;
 using TesteT2S.WebApi.Features.Containers.Models;
 using TesteT2S.WebApi.Features.Containers.ViewModels;
+using TesteT2S.WebApi.ViewModels;
 
 namespace TesteT2S.WebApi.Features.Containers
 {

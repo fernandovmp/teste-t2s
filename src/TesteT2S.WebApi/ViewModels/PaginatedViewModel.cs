@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TesteT2S.WebApi.Features.Containers.ViewModels
+namespace TesteT2S.WebApi.ViewModels
 {
     public class PaginatedViewModel<T>
     {
