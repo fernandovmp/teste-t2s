@@ -110,4 +110,8 @@ export class ContainerFormComponent implements OnInit {
     return null;
   }
 
+  goToHandlings() {
+    this.router.navigate(['/movimentacoes/container', this.containerForm.get('numero').value, 'novo']);
+  }
+
 }

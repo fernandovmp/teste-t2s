@@ -90,6 +90,10 @@
       [nzType]="'primary'"
       type="button"
       (click)="onDelete()">Deletar</button>
+    <button *ngIf="isInEditMode$ | async"
+      nz-button
+      type="button"
+      (click)="goToHandlings()">Nova Movimentação</button>
     <button nz-button
       [nzType]="'primary'"
       [disabled]="!containerForm.valid">Salvar</button>
