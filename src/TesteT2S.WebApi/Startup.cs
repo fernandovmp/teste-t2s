@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +23,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using TesteT2S.WebApi.Configuration;
 using TesteT2S.WebApi.Data;
 using TesteT2S.WebApi.Features.Containers.Mappers;
+using TesteT2S.WebApi.Features.Report.Data;
 
 namespace TesteT2S.WebApi
 {
@@ -53,11 +56,15 @@ namespace TesteT2S.WebApi
                 options.IncludeXmlComments(xmlPath);
                 options.AddFluentValidationRules();
             });
+
+            string connectionString = Configuration.GetConnectionString("SqlServerConnection");
             services.AddDbContext<ContainerContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection"));
+                options.UseSqlServer(connectionString);
                 options.LogTo(Console.WriteLine);
             });
+            services.AddTransient<IDbConnection>(servicesProvides => new SqlConnection(connectionString));
+            services.AddScoped<IReportRepository, ReportRepository>();
 
             services.AddAutoMapper(typeof(ContainerProfile));
 
