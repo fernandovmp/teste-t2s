@@ -116,7 +116,7 @@ namespace TesteT2S.WebApi.Features.ShipHandling
         /// <returns> A movimentação solicitada </returns>
         /// <response code="200"> Retorna a movimentação solicitada </response>
         /// <response code="404"> O container ou movimentação solicitada não existe </response>
-        [HttpGet("/api/v1/containers/{containerId:int}/movimentacao{handlingId:int}")]
+        [HttpGet("/api/v1/containers/{containerId:int}/movimentacao/{handlingId:int}")]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -265,7 +265,7 @@ namespace TesteT2S.WebApi.Features.ShipHandling
         /// </summary>
         /// <response code="204"> A movimentação foi deletado</response>
         /// <response code="404"> O container ou movimentação solicitada não existe </response>
-        [HttpDelete("/api/v1/containers/{containerId:int}/{handlingId:int}")]
+        [HttpDelete("/api/v1/containers/{containerId:int}/movimentacao/{handlingId:int}")]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -288,7 +288,7 @@ namespace TesteT2S.WebApi.Features.ShipHandling
         /// </summary>
         /// <response code="204"> A movimentação foi deletado</response>
         /// <response code="404"> O container ou movimentação solicitada não existe </response>
-        [HttpDelete("/api/v1/containers/{containerNumber}/{handlingId:int}")]
+        [HttpDelete("/api/v1/containers/{containerNumber}/movimentacao/{handlingId:int}")]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -333,7 +333,7 @@ namespace TesteT2S.WebApi.Features.ShipHandling
         /// <response code="204"> A movimentação foi atualizada</response>
         /// <response code="400"> Retorna os erros de validações </response>
         /// <response code="404"> O container ou a movimentação solicitada não existe </response>
-        [HttpPut("/api/v1/containers/{containerId:int}/{handlingId:int}")]
+        [HttpPut("/api/v1/containers/{containerId:int}/movimentacao/{handlingId:int}")]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -375,7 +375,7 @@ namespace TesteT2S.WebApi.Features.ShipHandling
         /// <response code="204"> A movimentação foi atualizada</response>
         /// <response code="400"> Retorna os erros de validações </response>
         /// <response code="404"> O container ou a movimentação solicitada não existe </response>
-        [HttpPut("/api/v1/containers/{containerNumber}/{handlingId:int}")]
+        [HttpPut("/api/v1/containers/{containerNumber}/movimentacao/{handlingId:int}")]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
