@@ -32,6 +32,17 @@
           </li>
         </ul>
       </li>
+      <li nz-submenu
+        nzOpen
+        nzTitle="Relatórios"
+        nzIcon="solution">
+        <ul>
+          <li nz-menu-item
+            nzMatchRouter>
+            <a [routerLink]="['relatorios/movimentacao']">Movimentações</a>
+          </li>
+        </ul>
+      </li>
     </ul>
   </nz-sider>
   <nz-layout>

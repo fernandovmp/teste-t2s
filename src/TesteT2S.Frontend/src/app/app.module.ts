@@ -15,6 +15,7 @@ import { registerLocaleData } from '@angular/common';
 import pt from '@angular/common/locales/pt';
 import { ContainerModule } from './container/container.module';
 import { HandlingModule } from './handling/handling.module';
+import { ReportModule } from './report/report.module';
 
 registerLocaleData(pt);
 
@@ -32,7 +33,8 @@ registerLocaleData(pt);
     HttpClientModule,
     BrowserAnimationsModule,
     ContainerModule,
-    HandlingModule
+    HandlingModule,
+    ReportModule
   ],
   providers: [{ provide: NZ_I18N, useValue: pt_BR }],
   bootstrap: [AppComponent]
