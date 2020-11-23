@@ -12,7 +12,7 @@ namespace TesteT2S.WebApi.Features.ShipHandling.Validations
                 .MaximumLength(50).WithMessage("Navio não deve ultrapassar 50 caractéres");
             RuleFor(handling => handling.TipoMovimentacao)
                 .IsInEnum().WithMessage("Valor do tipo de movimentação inválida");
-            RuleFor(handling => handling.DataFim)
+            RuleFor(handling => handling.DataInicio)
                 .LessThan(handling => handling.DataFim)
                 .WithMessage("Data de inicio deve ser inferior a data de fim");
         }
