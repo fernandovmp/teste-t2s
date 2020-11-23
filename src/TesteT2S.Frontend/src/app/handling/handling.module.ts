@@ -10,11 +10,13 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { HttpClientModule } from '@angular/common/http';
+import { HandlingFormComponent } from './handling-form/handling-form.component';
 
 
 @NgModule({
-  declarations: [HandlingListComponent],
+  declarations: [HandlingListComponent, HandlingFormComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -25,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     NzFormModule,
     NzInputModule,
     NzSelectModule,
+    NzDatePickerModule,
     HttpClientModule,
     HandlingRoutingModule
   ]

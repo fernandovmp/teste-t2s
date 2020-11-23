@@ -1,0 +1,66 @@
+<form class="handling-form"
+  nz-form
+  [nzLayout]="'vertical'"
+  [formGroup]="handlingForm"
+  (ngSubmit)="onSubmit()">
+  <nz-form-item>
+    <nz-form-label nzFor="numero">Número do container</nz-form-label>
+    <nz-form-control>
+      <input nz-input
+        name="numero"
+        id="numero"
+        formControlName="numero" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzFor="navio">Navio</nz-form-label>
+    <nz-form-control [nzErrorTip]="customerErrorTip">
+      <input nz-input
+        name="navio"
+        id="navio"
+        formControlName="navio" />
+      <ng-template #customerErrorTip let-control>
+        <ng-container *ngIf="control.hasError('maxlength')">
+          O navio não deve ultrapassar 50 caractéres
+        </ng-container>
+        <ng-container *ngIf="control.hasError('required')">
+          O nome do navio é obrigatório
+        </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzFor="tipoMovimentacao">Tipo de Movimentação</nz-form-label>
+    <nz-form-control>
+      <nz-select name="tipoMovimentacao"
+        id="tipoMovimentacao"
+        formControlName="tipoMovimentacao">
+        <nz-option nzValue="0" nzLabel="Embarque"></nz-option>
+        <nz-option nzValue="1" nzLabel="Descarga"></nz-option>
+        <nz-option nzValue="2" nzLabel="Gate In"></nz-option>
+        <nz-option nzValue="3" nzLabel="Gate Out"></nz-option>
+        <nz-option nzValue="4" nzLabel="Posicionamento"></nz-option>
+        <nz-option nzValue="5" nzLabel="Pilha"></nz-option>
+        <nz-option nzValue="6" nzLabel="Pesagem"></nz-option>
+        <nz-option nzValue="7" nzLabel="Scanner"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <div class="dates">
+    <nz-date-picker formControlName="dataInicio"
+      [nzPlaceHolder]="'Data de Inicio'"></nz-date-picker>
+    <nz-date-picker formControlName="dataFim" [nzPlaceHolder]="'Data de Fim'">
+    </nz-date-picker>
+  </div>
+  <nz-button-group class="form-buttons">
+    <button *ngIf="isInEditMode$ | async"
+      nz-button
+      nzDanger
+      [nzType]="'primary'"
+      type="button"
+      (click)="onDelete()">Deletar</button>
+    <button nz-button
+      [nzType]="'primary'"
+      [disabled]="!handlingForm.valid">Salvar</button>
+  </nz-button-group>
+</form>

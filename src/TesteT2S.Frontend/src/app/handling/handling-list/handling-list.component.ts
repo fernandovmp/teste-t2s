@@ -90,7 +90,7 @@ export class HandlingListComponent implements OnInit {
   }
 
   goToNew() {
-    this.router.navigate(['container', this.containerNumber, 'novo']);
+    this.router.navigate(['/movimentacoes/container', this.containerNumber.value, 'novo']);
   }
 
   containerNumberValidator(control: AbstractControl): ValidationErrors {
