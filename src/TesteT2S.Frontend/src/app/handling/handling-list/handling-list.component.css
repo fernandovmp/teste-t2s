@@ -1,0 +1,20 @@
+.handling-list-page {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.handling-list-page .action-btn {
+  font-weight: bold;
+}
+
+.handling-list-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.container-search {
+  display: flex;
+  gap: 6px;
+}

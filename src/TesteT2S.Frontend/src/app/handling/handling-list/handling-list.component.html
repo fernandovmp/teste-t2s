@@ -1,0 +1,74 @@
+<div class="handling-list-page">
+  <div class="handling-list-header">
+    <div class="container-search">
+      <nz-form-control [nzErrorTip]="containerErrorTip">
+        <input nz-input
+          [formControl]="containerNumber"
+          placeholder="Número do container" />
+      </nz-form-control>
+      <button nz-button
+        class="action-btn"
+        [nzType]="'primary'"
+        (click)="onSearch()"
+        [disabled]="!containerNumber.valid">Consultar</button>
+    </div>
+    <button nz-button
+      class="action-btn"
+      [nzType]="'primary'"
+      (click)="goToNew()"
+      [disabled]="!containerNumber.valid">
+      Nova Movimentação
+    </button>
+  </div>
+  <ng-template #containerErrorTip>
+    <ng-container *ngIf="containerNumber.hasError('notfound')">
+      O container não existe
+    </ng-container>
+    <ng-container *ngIf="containerNumber.hasError('containerNumberValidation')">
+      O número do container deve seguir as seguintes regras
+      <ul>
+        <li>Os 4 primeiros caractéres devem ser letras</li>
+        <li>Os 7 caractéres seguintes devem ser números</li>
+      </ul>
+    </ng-container>
+  </ng-template>
+  <nz-table #handlingsTable
+    [nzFrontPagination]="false"
+    [nzData]="(handlings$ | async)?.dados"
+    [nzPageSize]="(handlings$ | async)?.tamanho"
+    [nzPageIndex]="(handlings$ | async)?.paginaAtual"
+    [nzTotal]="(handlings$ | async)?.quantidadeTotal"
+    (nzPageIndexChange)="changePage($event)">
+    <thead>
+      <tr>
+        <th [nzSortFn]="true" (nzSortOrderChange)="sort('navio', $event)">
+          Navio</th>
+        <th [nzSortFn]="true" (nzSortOrderChange)="sort('tipo', $event)">
+          Tipo Movimentação
+        </th>
+        <th [nzSortFn]="true" (nzSortOrderChange)="sort('inicio', $event)">
+          Inicio
+        </th>
+        <th [nzSortFn]="true" (nzSortOrderChange)="sort('fim', $event)">
+          Fim
+        </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let handling of handlingsTable.data">
+        <td>{{handling.navio}}</td>
+        <td>{{handling.tipoMovimentacao.descricao}}</td>
+        <td>{{handling.dataInicio | date}}</td>
+        <td>{{handling.dataFim | date}}</td>
+        <td>
+          <a nz-icon
+            nzType="edit"
+            nzTheme="outline"
+            [routerLink]="['container', containerNumber.value, 'editar', handling.id]">
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

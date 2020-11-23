@@ -11,3 +11,9 @@ export interface IApiPaginatedResource<T> {
   quantidadeTotal: number;
   dados: T[];
 }
+
+export interface IApiGetOptions {
+  pagina?: number;
+  tamanho?: number;
+  ordenarPor?: string;
+}
