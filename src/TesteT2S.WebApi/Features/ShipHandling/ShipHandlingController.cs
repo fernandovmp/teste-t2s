@@ -169,9 +169,9 @@ namespace TesteT2S.WebApi.Features.ShipHandling
             query = ResolveSortingParam(query, sortValues);
 
             IEnumerable<HandlingViewModel> handlings = await query
+                .Where(handling => handling.ContainerId == container.Id)
                 .Skip((page - 1) * size)
                 .Take(size)
-                .Where(handling => handling.ContainerId == container.Id)
                 .Select(handling => _mapper.Map<HandlingViewModel>(handling))
                 .ToListAsync();
             int containersCount = await _containerContext.Containers.CountAsync();
@@ -213,9 +213,9 @@ namespace TesteT2S.WebApi.Features.ShipHandling
             query = ResolveSortingParam(query, sortValues);
 
             IEnumerable<HandlingViewModel> handlings = await query
+                .Where(handling => handling.ContainerId == containerId)
                 .Skip((page - 1) * size)
                 .Take(size)
-                .Where(handling => handling.ContainerId == containerId)
                 .Select(handling => _mapper.Map<HandlingViewModel>(handling))
                 .ToListAsync();
             int containersCount = await _containerContext.Containers.CountAsync();
