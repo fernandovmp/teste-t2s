@@ -1,1 +1,61 @@
-<p>handling-report works!</p>
+<main class="handling-report-page">
+  <nz-table #reportTable
+    [nzFrontPagination]="false"
+    [nzShowPagination]="false"
+    [nzData]="(reports$ | async)?.dados">
+    <thead>
+      <tr>
+        <th>
+        </th>
+        <th>
+          Cliente
+        </th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let reportData of reportTable.data">
+        <tr>
+          <td [(nzExpand)]="reportData.expand"></td>
+          <td>{{reportData.cliente}}</td>
+          <td style="width: 70%;">
+            <ng-container *ngIf="!reportData.expand"> essa linha para ver mais
+              informações</ng-container>
+          </td>
+        </tr>
+        <tr [nzExpand]="reportData.expand">
+          <nz-table #handlingTable
+            [nzFrontPagination]="false"
+            [nzShowPagination]="false"
+            [nzData]="reportData.movimentacoes">
+            <thead>
+              <tr>
+                <th>
+                  Tipo de Movimentação
+                </th>
+                <th>
+                  Quantidade
+                </th>
+              </tr>
+            </thead>
+    <tbody>
+      <tr *ngFor="let handlingData of handlingTable.data">
+        <td>{{handlingData.tipoMovimentacao.descricao}}</td>
+        <td>{{handlingData.quantidadeMovimentacoes}}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+  </tr>
+  </ng-container>
+  </tbody>
+  </nz-table>
+
+  <div class="handling-report-info">
+    <p>Total de exportações:
+      <strong>{{(reports$ | async)?.totalExportacoes}}</strong></p>
+    <p>Total de importações:
+      <strong>{{(reports$ | async)?.totalImportacoes}}</strong></p>
+  </div>
+
+</main>

@@ -1,0 +1,15 @@
+.handling-report-page {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.handling-report-info {
+  font-size: medium;
+  align-self: flex-start;
+  display: flex;
+  gap: 6px;
+}
+
+.handling-report-info p {
+  margin: 0;
+}
