@@ -96,7 +96,7 @@ namespace TesteT2S.WebApi
                 options.SwaggerEndpoint("/docs/v1/swagger.json", "TesteT2S.WebApi v1");
             });
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
