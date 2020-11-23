@@ -147,7 +147,7 @@ namespace TesteT2S.WebApi.Features.Containers
             {
                 return ResolveSortingParam(query, sortKey: sortValues[0], sortPattern: sortValues[1]);
             }
-            return query.OrderBy(container => container.Number);
+            return ResolveSortingParam(query, sortKey: sortValues[0], sortPattern: "asc");
 
         }
 
