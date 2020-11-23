@@ -1,0 +1,33 @@
+.welcome-message {
+  text-align: center;
+}
+
+.quick-buttons {
+  margin-top: 80px;
+
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+}
+
+.quick-buttons a {
+  border-radius: 6px;
+  background-color: #dddddd;
+  width: 150px;
+  height: 150px;
+
+  text-decoration: none;
+  color: #202020;
+  font-weight: bold;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.quick-buttons a:hover {
+  cursor: pointer;
+  background-color: #d0d0d0;
+}

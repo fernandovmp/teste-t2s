@@ -5,8 +5,8 @@ import { ContainerListComponent } from './container-list/container-list.componen
 
 const routes: Routes = [
   { path: 'containers', component: ContainerListComponent },
-  { path: 'containers/new', component: ContainerFormComponent, data: { isInEditMode: false } },
-  { path: 'containers/edit/:id', component: ContainerFormComponent, data: { isInEditMode: true } }
+  { path: 'containers/novo', component: ContainerFormComponent, data: { isInEditMode: false } },
+  { path: 'containers/editar/:id', component: ContainerFormComponent, data: { isInEditMode: true } }
 ];
 
 @NgModule({
