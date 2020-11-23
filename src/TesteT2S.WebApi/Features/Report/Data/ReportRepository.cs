@@ -19,7 +19,7 @@ namespace TesteT2S.WebApi.Features.Report.Data
         public async Task<HandlingReportCollection> GetHandlingReport()
         {
             const string Query = @"
-            select [Containers].Customer, [Handlings].HandlingType, Sum([Handlings].HandlingType) as HandlingAmount
+            select [Containers].Customer, [Handlings].HandlingType, Count([Handlings].HandlingType) as HandlingAmount
                 from Handlings
                 INNER JOIN [Containers] on [Handlings].[ContainerId] = [Containers].[Id]
                 GROUP BY [Containers].Customer, [Handlings].[HandlingType]
