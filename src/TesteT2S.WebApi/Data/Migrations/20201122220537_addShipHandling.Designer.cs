@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TesteT2S.WebApi.Data;
 
 namespace TesteT2S.WebApi.Data.Migrations
 {
     [DbContext(typeof(ContainerContext))]
-    partial class ContainerContextModelSnapshot : ModelSnapshot
+    [Migration("20201122220537_addShipHandling")]
+    partial class addShipHandling
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
