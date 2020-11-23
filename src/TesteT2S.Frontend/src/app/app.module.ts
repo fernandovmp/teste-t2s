@@ -14,6 +14,7 @@ import { pt_BR } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import pt from '@angular/common/locales/pt';
 import { ContainerModule } from './container/container.module';
+import { HandlingModule } from './handling/handling.module';
 
 registerLocaleData(pt);
 
@@ -30,7 +31,8 @@ registerLocaleData(pt);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ContainerModule
+    ContainerModule,
+    HandlingModule
   ],
   providers: [{ provide: NZ_I18N, useValue: pt_BR }],
   bootstrap: [AppComponent]
